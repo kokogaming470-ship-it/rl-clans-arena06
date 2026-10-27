@@ -1,1 +1,1 @@
-{"name":"rl-clans","version":"2.0.0","private":true,"engines":{"node":"22.x"},"dependencies":{"@upstash/redis":"^1.34.0"}}
+{"name":"rl-clans","version":"4.0.0","private":true,"engines":{"node":"22.x"},"dependencies":{"@upstash/redis":"^1.34.0"}}

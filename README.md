@@ -1,5 +1,17 @@
-1) فك الضغط، وارفع اللي جوه المجلد على GitHub بحيث تفتح الريبو تلاقي في أول صفحة: api و public و package.json و vercel.json (مش مجلد rl-clans).
-2) حط DISCORD_CLIENT_ID و DISCORD_CLIENT_SECRET في discord-config.js (أو Vercel > Settings > Environment Variables).
-3) Discord Developer Portal > OAuth2 > Redirects: https://rl-clans-arena2.vercel.app/api/callback
-4) Vercel > Storage > Upstash Redis واربطه ثم Redeploy.
-5) افتح /api/health: clientId و secret و session لازم true.
+RL Clans Arena v4
+
+النشر (من غير GitHub):
+1) فك الضغط. افتح الـ CMD جوه المجلد اللي فيه api و public.
+2) نفّذ:   npx vercel --prod
+3) تأكد إن Upstash Redis مربوط بالمشروع (Vercel > Storage) — الكود مكتوب على Upstash بالذات.
+4) افتح /api/health  لازم يرجّع  redis: true  و clientId / secret / session = true.
+
+الجديد في v4:
+- أي حدث يظهر للكل لحظيًا (إشعار منبثق + جرس الأحداث + "آخر الأحداث" في الرئيسية):
+  دخول لاعب جديد، رجوع لاعب للموقع، طلب دخول جديد، قبول كلان، إضافة/تعديل/حذف قانون، إضافة/إلغاء موعد.
+- صفحة "طلباتي" للمسجّلين فقط: حالة الطلب (تايم لاين) + فتح شات مع الإدارة.
+- المواعيد ككروت ماتشات: لوجو الكلانات + VS + عدّاد تنازلي + حالة (قريبًا / يُلعب الآن / انتهى) + نسخ الغرفة والباسورد.
+- دخلة 30 ثانية: نظام البطولة + قوانين VAR + مميزات الموقع (بتظهر مرة في كل جلسة، وفي زر تخطي وزر "إعادة الدخلة" في الفوتر).
+- تم حذف سؤال الجوائز — البطولة ترفيهية بدون جوائز.
+- قوانين VAR اتزادت (9 قوانين + مراحل المراجعة).
+- الموقع بيسأل السيرفر كل 8 ثواني بطلب واحد خفيف، وبيسحب البيانات بس لما يحصل تغيير (توفير لحدود Upstash المجانية).
