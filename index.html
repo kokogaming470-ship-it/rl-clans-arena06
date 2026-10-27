@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RL Clans Arena</title>
+<title>RL Clans Arena</title><meta name="theme-color" content="#06070b">
 <style>
 :root{--bg:#06070b;--fg:#f4ecd8;--mut:#a79f89;--c1:#e8c872;--c2:#c89a3c;--c3:#ff7a2f;--card:rgba(20,22,48,.55);--bd:rgba(130,140,255,.22);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05060f;--fg:#eef0ff}}
@@ -147,15 +147,198 @@ option{background:#0d0e14;color:#f4ecd8}
 #uchip.on{display:flex}#uchip img{width:28px;height:28px;border-radius:50%;border:1.5px solid #e8c872;object-fit:cover}
 #uchip a{color:var(--mut);text-decoration:none;font-size:12px;border-inline-start:1px solid #ffffff22;padding-inline-start:8px}#uchip a:hover{color:#ff8fb3}
 @media(prefers-reduced-motion:reduce){.gcard::before,.gtt,.gemb *,.dcb::after{animation:none}}
+
+/* ================= v4 ================= */
+button{font-family:inherit}
+.hide{display:none!important}
+.btn,.big,nav button,.dcb{position:relative;overflow:hidden}
+.rp{position:absolute;border-radius:50%;background:#ffffff55;transform:scale(0);animation:rpl .7s ease-out forwards;pointer-events:none}
+@keyframes rpl{to{transform:scale(4);opacity:0}}
+.btn:hover{border-color:#e8c872aa;transform:translateY(-2px)}.btn:active,.big:active{transform:scale(.97)}
+.btn.go{background:linear-gradient(135deg,#f3dc92,#c89a3c);color:#1a1204;border-color:transparent;font-weight:700}
+/* toasts */
+#toasts{position:fixed;top:calc(68px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:97;display:flex;flex-direction:column;gap:8px;width:min(440px,calc(100vw - 24px));pointer-events:none}
+.tt{position:relative;overflow:hidden;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;background:linear-gradient(135deg,#1c160a,#0d0e15);border:1px solid #e8c87299;box-shadow:0 14px 40px #000a;color:var(--fg);font-weight:500;line-height:1.5;opacity:0;transform:translateY(-24px) scale(.92);transition:.5s cubic-bezier(.2,1.3,.3,1)}
+.tt.on{opacity:1;transform:none}.tt i{font-style:normal;font-size:20px;flex:none}
+.tt u{position:absolute;bottom:0;inset-inline:0;height:2px;background:linear-gradient(90deg,#c89a3c,#ffe29a);transform-origin:left;animation:tb 5.2s linear forwards}
+@keyframes tb{to{transform:scaleX(0)}}
+/* nav extras */
+.dot{display:none;position:absolute;top:5px;left:7px;width:8px;height:8px;border-radius:50%;background:#ff5d6c;box-shadow:0 0 10px #ff5d6c;animation:blink 1.2s infinite}.dot.on{display:block}
+.onl{display:flex;align-items:center;gap:7px;font-size:13px;color:#bfe9cf;padding:6px 12px;border-radius:99px;border:1px solid #1fe07a44;background:#1fe07a12;white-space:nowrap;flex:none}
+.onl i{width:8px;height:8px;border-radius:50%;background:#2ee67e;animation:pu 1.8s infinite}
+@keyframes pu{0%{box-shadow:0 0 0 0 #2ee67e99}70%,100%{box-shadow:0 0 0 9px #2ee67e00}}
+nav>*{flex:none}
+#bell{position:fixed;left:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:58;width:54px;height:54px;border-radius:50%;padding:0;display:grid;place-items:center;cursor:pointer;background:linear-gradient(145deg,#1f180a,#0b0c13);border:1px solid #e8c872aa;box-shadow:0 10px 34px #000a,0 0 24px #c89a3c44;transition:.3s}
+#bell:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 14px 40px #000a,0 0 34px #e8c87288}
+#bell svg{width:24px;height:24px;fill:none;stroke:#e8c872;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 10%}
+#bell.rung svg{animation:ringb 1s}
+@keyframes ringb{20%{transform:rotate(18deg)}40%{transform:rotate(-16deg)}60%{transform:rotate(10deg)}80%{transform:rotate(-6deg)}}
+#bell em{position:absolute;top:-2px;right:-2px;min-width:17px;height:17px;padding:0 4px;border-radius:99px;background:#ff5d6c;color:#fff;font:700 11px/17px Tajawal,sans-serif;font-style:normal;text-align:center;animation:pop2 .5s cubic-bezier(.2,1.6,.3,1)}
+@keyframes pop2{from{transform:scale(0)}}
+/* drawer */
+#drawer{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom,0px));left:12px;z-index:60;width:min(380px,calc(100vw - 24px));max-height:64vh;overflow:auto;border-radius:18px;background:linear-gradient(165deg,#17130bf8,#0a0b12f8);border:1px solid #e8c87255;box-shadow:0 30px 80px #000c;backdrop-filter:blur(16px);opacity:0;visibility:hidden;transform:translateY(14px) scale(.95);transform-origin:bottom left;transition:.4s cubic-bezier(.2,1.2,.3,1)}
+#drawer.on{opacity:1;visibility:visible;transform:none}
+#drawer header{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#120e06;border-bottom:1px solid #e8c87233;font:700 17px "Reem Kufi",Tajawal,sans-serif;color:#f3dc92;z-index:1}
+#drawer header button{background:none;border:0;color:var(--mut);font-size:16px;cursor:pointer}
+.ev{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid #ffffff0d;animation:evin .55s both;line-height:1.55}
+.ev:last-child{border:0}.ev i{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-style:normal;font-size:18px;background:#e8c87218;border:1px solid #e8c87233}
+.ev small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+@keyframes evin{from{opacity:0;transform:translateX(24px)}}
+.empty{padding:26px;text-align:center;color:var(--mut)}
+/* hero */
+.pill{display:inline-block;padding:7px 18px;border-radius:99px;font-size:14px;color:#ffe29a;background:#e8c87214;border:1px solid #e8c87255;animation:fl2 3s ease-in-out infinite alternate,glow 2.4s infinite alternate}
+.hero h1{animation:hin 1s .1s both}@keyframes hin{from{opacity:0;transform:translateY(30px) scale(.94);filter:blur(10px)}}
+.cta{justify-content:center;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:8px 0 6px}
+.st{text-align:center;padding:18px 8px;border-radius:16px;background:linear-gradient(160deg,#16130c99,#0b0c1299);border:1px solid #e8c87233;transition:.4s;position:relative;overflow:hidden}
+.st:hover{transform:translateY(-4px);border-color:#e8c872aa;box-shadow:0 14px 40px #c89a3c26}
+.st b{display:block;font:800 34px/1.1 Cinzel,serif;background:linear-gradient(180deg,#fff4cf,#e8c872 55%,#b8862b);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.st span{font-size:13px;color:var(--mut)}
+.feed{padding:0;overflow:hidden}
+.mcard{text-align:center;cursor:default}.mcard h2{margin-bottom:8px}.mcard p{margin:0}
+/* match cards */
+.match{position:relative;overflow:hidden;margin:16px 0;padding:20px 18px 18px;border-radius:20px;background:linear-gradient(160deg,#1a150bf2,#0a0b12f2);border:1px solid #e8c87244;box-shadow:0 20px 50px #0008,inset 0 1px 0 #ffffff10;transition:border-color .4s,box-shadow .4s,transform .25s;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.match::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),#e8c87226,transparent 60%);pointer-events:none;opacity:0;transition:.4s}
+.match:hover::before{opacity:1}.match:hover{border-color:#e8c872bb;box-shadow:0 26px 70px #c89a3c33}
+.match::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#ffffff0d,transparent);transform:skewX(-20deg);animation:swp2 6s ease-in-out infinite;pointer-events:none}
+@keyframes swp2{0%,60%{left:-60%}100%{left:130%}}
+.match.live{border-color:#ff4d5e99;box-shadow:0 0 0 1px #ff4d5e55,0 20px 60px #ff4d5e22}
+.match.end{opacity:.6;filter:saturate(.6)}
+.mtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.mmode{font:800 15px Cinzel,serif;letter-spacing:2px;padding:4px 14px;border-radius:99px;background:#e8c87222;border:1px solid #e8c87255;color:#f3dc92}
+.mst{font-size:13px;padding:4px 12px;border-radius:99px;background:#ffc53d22;color:#ffd97a}
+.live .mst{background:#ff4d5e22;color:#ff8f9a;animation:blink 1.2s infinite}.end .mst{background:#ffffff14;color:var(--mut)}
+@keyframes blink{50%{opacity:.4}}
+.mbody{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.team{text-align:center;min-width:0}
+.team h3{margin:12px 0 0;font:700 clamp(16px,4vw,22px)/1.25 "Reem Kufi",Tajawal,sans-serif;word-break:break-word;color:#f4ecd8}
+.mlogo{width:clamp(70px,20vw,104px);height:clamp(70px,20vw,104px);margin:0 auto;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#2a210f,#0c0d14);border:2px solid #e8c872;box-shadow:0 0 0 5px #e8c87214,0 10px 34px #c89a3c55;overflow:hidden;animation:fl2 4s ease-in-out infinite alternate}
+.mbody .team:last-child .mlogo{animation-delay:-2s}
+.mlogo img{width:100%;height:100%;object-fit:cover}.mlogo span{font:800 42px Cinzel,serif;color:#e8c872}
+.vsb{display:flex;flex-direction:column;align-items:center;gap:6px}
+.vsb i{width:2px;height:26px;background:linear-gradient(transparent,#e8c872,transparent)}
+.vsb b{font:800 clamp(26px,7vw,42px)/1 Cinzel,serif;background:linear-gradient(180deg,#fff4cf,#e8c872 50%,#b8862b);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px #c89a3c88);animation:vsp 2s ease-in-out infinite}
+@keyframes vsp{50%{transform:scale(1.15);filter:drop-shadow(0 0 24px #ffd56b)}}
+.cd{display:flex;justify-content:center;gap:8px;margin:20px 0 12px;direction:ltr}
+.cd div{min-width:58px;padding:8px 6px;border-radius:12px;background:#00000055;border:1px solid #e8c87233;text-align:center}
+.cd b{display:block;font:800 22px Cinzel,serif;color:#f3dc92;font-variant-numeric:tabular-nums}.cd small{font-size:11px;color:var(--mut)}
+.cdx{text-align:center;margin:18px 0 12px;font-weight:700;color:var(--mut)}.live .cdx{color:#ff8f9a}
+.mmeta{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:14px}
+.mmeta>*{padding:7px 14px;border-radius:99px;background:#ffffff0a;border:1px solid #e8c87222}
+.mmeta .cp{cursor:pointer;transition:.3s}.mmeta .cp:hover{background:#e8c87222;border-color:#e8c872;transform:translateY(-2px)}.mmeta b{color:#ffe29a;user-select:text}
+.sec{display:flex;align-items:center;gap:10px}.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#e8c87266,transparent)}
+/* VAR page */
+.vtl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:10px 0 26px}
+.vtl div{position:relative;text-align:center;padding:18px 10px;border-radius:16px;background:linear-gradient(160deg,#16130c99,#0b0c1299);border:1px solid #e8c87233}
+.vtl div b{display:grid;place-items:center;width:42px;height:42px;margin:0 auto 8px;border-radius:50%;font:800 18px Cinzel,serif;background:linear-gradient(135deg,#f3dc92,#b8862b);color:#1a1204;box-shadow:0 0 0 0 #e8c872aa;animation:pu2 2.4s infinite}
+@keyframes pu2{70%,100%{box-shadow:0 0 0 12px #e8c87200}}
+.vtl small{display:block;color:var(--mut);margin-top:4px}
+.rule{transition:.4s}.rule:hover .n{transform:rotate(-8deg) scale(1.12)}.rule .n{transition:.4s;flex:none}
+/* forms */
+.warn{padding:12px 16px;border-radius:12px;background:#ffc53d14;border:1px solid #ffc53d55;color:#ffd97a;margin-bottom:14px}
+/* my requests */
+.emptyc{text-align:center;padding:40px 20px}.emptyc .big-ic{font-size:54px;animation:fl2 3s ease-in-out infinite alternate}
+.tl{display:flex;position:relative;margin:26px 4px 18px}
+.tl::before{content:"";position:absolute;top:18px;inset-inline:16.6%;height:3px;background:#ffffff14;border-radius:3px}
+.tl .ln{position:absolute;top:18px;inset-inline-start:16.6%;height:3px;border-radius:3px;background:linear-gradient(90deg,#c89a3c,#ffe29a);width:var(--w);animation:grow 1.3s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{width:0}}
+.tl>div{position:relative;z-index:1;flex:1;text-align:center;font-size:13px;color:var(--mut)}
+.tl>div i{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 7px;border-radius:50%;font-style:normal;background:#10111a;border:2px solid #ffffff22;transition:.5s}
+.tl>div.done{color:var(--fg)}.tl>div.done i{border-color:#e8c872;background:linear-gradient(135deg,#f3dc92,#b8862b);color:#1a1204;font-weight:900}
+.tl>div.act i{border-color:#ffc53d;animation:pu2 1.6s infinite;box-shadow:0 0 0 0 #ffc53daa}
+.tl>div.ok i{border-color:#2ee67e;background:linear-gradient(135deg,#6dffb0,#1fa85a)}.tl>div.no i{border-color:#ff5d6c;background:linear-gradient(135deg,#ff8f9a,#c0303f);color:#fff}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:12px 0}
+.kv div{padding:10px 12px;border-radius:12px;background:#ffffff08;border:1px solid #e8c87222;font-size:14px;word-break:break-word}.kv small{display:block;color:var(--mut);font-size:12px}
+.banner{padding:14px 16px;border-radius:14px;margin:10px 0;text-align:center;font-weight:700;background:linear-gradient(90deg,#1fe07a14,#1fe07a2a,#1fe07a14);background-size:200%;border:1px solid #2ee67e66;color:#8dffc0;animation:bgs 3s linear infinite}
+@keyframes bgs{to{background-position:200%}}
+.proof{min-height:20px}.proof img{cursor:zoom-in;transition:.3s}.proof img:hover{transform:scale(1.04)}
+#zoom{position:fixed;inset:0;z-index:120;background:#000d;display:grid;place-items:center;padding:20px;cursor:zoom-out;animation:fi .3s}#zoom img{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 0 80px #c89a3c55;animation:pop2 .4s}
+.cnt{margin:10px 0}.app h2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* chat */
+.chat{border:1px solid #e8c87233;border-radius:16px;overflow:hidden;background:#00000040;margin-top:14px;animation:pgi .6s both}
+.chat header{display:flex;align-items:center;gap:9px;padding:11px 14px;background:#e8c87212;border-bottom:1px solid #e8c87222;font-weight:700}
+.chat header i{width:9px;height:9px;border-radius:50%;background:#2ee67e;animation:pu 1.8s infinite}
+.cmsgs{height:min(320px,50vh);overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.b{max-width:82%;padding:9px 13px;border-radius:16px 16px 4px 16px;background:#5865f233;border:1px solid #5865f277;line-height:1.6;word-break:break-word;align-self:flex-end;user-select:text}
+.b.mine{align-self:flex-start;background:#e8c87226;border-color:#e8c87244;border-radius:16px 16px 16px 4px}
+.b small{display:block;font-size:11px;color:var(--mut);margin-top:3px}
+.b.new{animation:bpop .5s cubic-bezier(.2,1.4,.3,1)}@keyframes bpop{from{opacity:0;transform:translateY(16px) scale(.8)}}
+.cin{display:flex;gap:8px;padding:10px;border-top:1px solid #e8c87222;align-items:center}.cin input{margin:0;flex:1}
+.chatoff{text-align:center;padding:14px;margin-top:10px;border-radius:14px;background:#ffffff06;border:1px dashed #e8c87244}
+/* ===== 30s intro ===== */
+#splash .sc{position:absolute;inset:0;display:grid;place-items:center;align-content:center;padding:20px 16px 130px;opacity:0;visibility:hidden;transform:scale(.96);filter:blur(12px);transition:opacity .9s,transform .9s,filter .9s,visibility .9s}
+#splash .sc.on{opacity:1;visibility:visible;transform:none;filter:none}
+#splash.open .sc.on{opacity:0;transform:scale(1.12);filter:blur(14px)}
+#splash .it{opacity:0}
+#splash .sc.on .it{animation:itin .85s cubic-bezier(.2,1,.3,1) var(--d,0s) both}
+@keyframes itin{from{opacity:0;transform:translateY(34px) scale(.92);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#splash .sbar i{animation:ld 30s linear forwards}
+.sbox{text-align:center;width:min(760px,94vw)}
+.kick{letter-spacing:.5em;font-size:12px;color:#c9bd99;direction:ltr}
+.sbox h2,.varm h2{font:800 clamp(28px,7vw,52px)/1.2 "Reem Kufi",Tajawal,sans-serif;margin:8px 0 22px;color:#f4ecd8}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{padding:22px 8px;border-radius:18px;background:linear-gradient(160deg,#1c160acc,#0a0b12);border:1px solid #e8c87255;box-shadow:0 14px 40px #0008}
+.tile b{display:block;font:800 clamp(30px,8vw,52px)/1 Cinzel,serif;margin-bottom:6px;background:linear-gradient(180deg,#fff7da,#e8c872 50%,#9a6a16);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile span{font-size:13px;color:#cfc6aa}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.chips span{padding:8px 16px;border-radius:99px;border:1px solid #e8c87244;background:#e8c87212;font-size:14px}
+.varm{position:relative;width:min(720px,94vw);padding:18px 18px 16px;border-radius:18px;background:linear-gradient(165deg,#0d0f16f2,#06070bf2);border:1px solid #e8c87266;box-shadow:0 30px 90px #000c,0 0 80px #c89a3c22;overflow:hidden}
+.varm::after{content:"";position:absolute;left:0;right:0;height:90px;top:-90px;background:linear-gradient(transparent,#e8c87218,transparent);animation:scan 3.2s linear infinite;pointer-events:none}
+@keyframes scan{to{top:100%}}
+.vh{display:flex;justify-content:space-between;align-items:center;direction:ltr;font:600 12px "Courier New",monospace;color:#c9bd99;letter-spacing:.12em}
+.rec{color:#ff5d6c}.rec::before{content:"● ";animation:blink 1s infinite}
+.stamp{color:#2ee67e;border:2px solid #2ee67e;padding:2px 10px;border-radius:6px;opacity:0;transform:rotate(-6deg)}
+#splash .sc.on .stamp{animation:stp .6s 8.6s cubic-bezier(.2,1.6,.3,1) both}
+@keyframes stp{from{opacity:0;transform:rotate(-6deg) scale(3)}to{opacity:1;transform:rotate(-6deg) scale(1)}}
+.varm h2{font-size:clamp(22px,5.5vw,34px);margin:8px 0 12px;text-align:center}.varm h2 b{font-family:Cinzel,serif;letter-spacing:.1em;background:linear-gradient(180deg,#fff7da,#e8c872 50%,#9a6a16);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vl{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.vl li{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:12px;background:#ffffff08;border:1px solid #e8c87222;font-size:clamp(13px,3.5vw,16px);line-height:1.5}
+.vl li em{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font:800 13px Cinzel,serif;font-style:normal;background:linear-gradient(135deg,#f3dc92,#b8862b);color:#1a1204}
+.vl li::after{content:"✓";margin-inline-start:auto;color:#2ee67e;font-weight:900;opacity:0}
+#splash .sc.on .vl li::after{animation:chk .45s calc(var(--d,0s) + .9s) both}
+@keyframes chk{from{opacity:0;transform:scale(2.4)}to{opacity:1;transform:none}}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:min(780px,94vw)}
+.fg div{padding:20px 10px;text-align:center;border-radius:16px;background:linear-gradient(160deg,#1c160acc,#0a0b12);border:1px solid #e8c87244}
+.fg b{display:block;font-size:32px;margin-bottom:8px}.fg strong{display:block;font-size:15px;color:#f3dc92}.fg small{color:#bdb494;font-size:12.5px}
+.fin h1{font:800 clamp(34px,10vw,80px)/1.15 "Reem Kufi",Tajawal,sans-serif;margin:0;background:linear-gradient(180deg,#fff7da,#e8c872 50%,#9a6a16);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 30px #c89a3c88)}
+.fin{text-align:center}.fin p{color:#c9bd99;letter-spacing:.3em;direction:ltr}
+.dots{position:absolute;bottom:88px;display:flex;gap:8px}.dots i{width:26px;height:3px;border-radius:3px;background:#ffffff1f;transition:.5s}.dots i.on{background:#e8c872;box-shadow:0 0 10px #e8c872}
+.scap{position:absolute;bottom:106px;font-size:12px;letter-spacing:.3em;color:var(--mut);transition:.4s}
+.replay{background:none;border:0;color:var(--mut);cursor:pointer;font:inherit;letter-spacing:0;margin-inline-start:12px}.replay:hover{color:#e8c872}
+@media(max-width:560px){.fg{grid-template-columns:repeat(2,1fr)}.fg div{padding:14px 8px}.tile{padding:16px 4px}.onl span{display:none}}
+@media(prefers-reduced-motion:reduce){.match::after,.vsb b,.mlogo,.pill,.vtl div b,.varm::after{animation:none}}
 </style></head><body>
 <div id="bg"></div><canvas id="cv"></canvas>
-<div id="toast"></div>
+<div id="toasts"></div>
+
 <div id="splash"><div class="door l"></div><div class="door r"></div>
+<div class="sc on" data-s="0">
 <svg class="pitch" viewBox="0 0 800 480" fill="none"><g class="dr"><rect x="40" y="40" width="720" height="400" rx="70"/><path d="M400 40V440"/><circle cx="400" cy="240" r="72"/><rect x="40" y="170" width="70" height="140"/><rect x="690" y="170" width="70" height="140"/><circle cx="400" cy="240" r="6"/></g></svg>
 <i class="trail"></i><i class="ball"></i><i class="flash"></i>
-<div class="ttl"><h1 id="sT"></h1><i class="sline"></i><div class="ssub">CLAN TOURNAMENT &nbsp;•&nbsp; VAR</div></div>
-<div class="sbar"><i></i></div><div class="spw">POWERED BY <b>MMH</b></div><button id="skip">تخطي</button></div>
+<div class="ttl"><h1 id="sT"></h1><i class="sline"></i><div class="ssub">CLAN TOURNAMENT &nbsp;•&nbsp; VAR</div></div></div>
 
+<div class="sc" data-s="1"><div class="sbox">
+<div class="kick it" style="--d:.1s">TOURNAMENT SYSTEM</div><h2 class="it" style="--d:.25s">نظام البطولة · كلان ضد كلان</h2>
+<div class="tiles"><div class="tile it" style="--d:.5s"><b>1v1</b><span>مواجهة قادة الكلانات</span></div><div class="tile it" style="--d:.7s"><b>2v2</b><span>ثنائيات وتكتيك سريع</span></div><div class="tile it" style="--d:.9s"><b>3v3</b><span>القتال الكامل</span></div></div>
+<div class="chips"><span class="it" style="--d:1.5s">🎯 الشرط: Gold 2 أو أعلى</span><span class="it" style="--d:1.7s">⚔ Best of 1 ثم Best of 3 للإقصائيات</span><span class="it" style="--d:1.9s">⏱ 5 دقائق + هدف ذهبي</span></div></div></div>
+
+<div class="sc" data-s="2"><div class="varm">
+<div class="vh"><span class="rec">REC · VAR ROOM</span><span id="tc">00:00:00:00</span><span class="stamp">VAR CHECK ✓</span></div>
+<h2 class="it" style="--d:.1s"><b>VAR</b> · قوانين المراجعة</h2><ol class="vl" id="introVar"></ol></div></div>
+
+<div class="sc" data-s="3"><div class="sbox"><div class="kick it" style="--d:.1s">AND MORE</div><h2 class="it" style="--d:.2s">وأكتر من كده</h2>
+<div class="fg">
+<div class="it" style="--d:.4s"><b>🎮</b><strong>ترفيهية بدون جوائز</strong><small>المتعة والمنافسة الشريفة بس</small></div>
+<div class="it" style="--d:.6s"><b>🎥</b><strong>كل ماتش متسجّل</strong><small>بث مباشر أو تسجيل لكل جولة</small></div>
+<div class="it" style="--d:.8s"><b>📅</b><strong>مواعيد رسمية</strong><small>كروت ماتشات وعدّاد تنازلي</small></div>
+<div class="it" style="--d:1s"><b>💬</b><strong>شات مع الإدارة</strong><small>من صفحة «طلباتي» مباشرة</small></div>
+<div class="it" style="--d:1.2s"><b>🔔</b><strong>إشعارات حيّة للكل</strong><small>أي حدث يظهر للجميع لحظيًا</small></div>
+<div class="it" style="--d:1.4s"><b>🤝</b><strong>روح رياضية</strong><small>الاحترام قبل أي حاجة</small></div></div></div></div>
+
+<div class="sc" data-s="4"><div class="fin"><p class="it" style="--d:.1s">ARE YOU READY</p><h1 class="it" style="--d:.3s">جاهز للساحة؟</h1></div></div>
+
+<div class="scap" id="scap"></div><div class="dots"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="sbar"><i></i></div><div class="spw">POWERED BY <b>MMH</b></div><button id="skip">تخطي ›</button></div>
 
 <div id="gate" class="hide"><div class="gwrap">
 <div class="gemb"><i class="orb b"></i><i class="orb"></i>
@@ -168,93 +351,205 @@ option{background:#0d0e14;color:#f4ecd8}
 <button class="gguest" id="gateSkip" type="button">المتابعة كزائر ←</button></div>
 </div></div>
 
-<nav id="nav">
-<button data-p="home" class="on">الرئيسية</button><button data-p="rules">القوانين</button><button data-p="var">نظام VAR</button><button data-p="sched">المواعيد</button><button data-p="apply">طلب دخول</button><button data-p="admin" id="adminBtn" class="hide">الإدارة</button>
-<a class="dc" href="https://discord.gg/MxnXaMH88W" target="_blank" rel="noopener">◉ Discord</a><div id="uchip"><img id="uav" alt=""><span id="uname"></span><a href="/api/logout">خروج</a></div></nav>
 
-<section class="pg on" id="home"><div class="hero rv"><h1 class="grad">بطولة كلانات Rocket League</h1><p>كلان ضد كلان · نظام فار احترافي · 1v1 · 2v2 · 3v3 — سجّل كلانك الآن وادخل الساحة.</p>
-<div class="row" style="justify-content:center"><button class="big" onclick="go('apply')">قدّم طلب دخول</button><button class="btn" onclick="go('sched')">المواعيد</button></div></div>
-<div class="grid"><div class="card rv"><h2>1v1</h2><p class="muted">مواجهات فردية بين قادة الكلانات.</p></div><div class="card rv"><h2>2v2</h2><p class="muted">ثنائيات متناغمة وتكتيك سريع.</p></div><div class="card rv"><h2>3v3</h2><p class="muted">القتال الكامل بين الكلانات.</p></div></div>
-<div class="card rv"><h2>VAR</h2><p class="muted">كل ماتش يُسجَّل ويُراجَع بواسطة VAR، مع بث مباشر أو تسجيل لكل جولة.</p></div>
-<div class="card rv"><h2>الشرط الأساسي</h2><p class="muted">رانك Gold 2 أو أعلى في 1v1 أو 2v2 (3v3 اختياري).</p></div></section>
+<div id="drawer"><header><span>🔔 الأحداث المباشرة</span><button id="drawerX" aria-label="إغلاق">✕</button></header><div id="drawerList"></div></div>
+
+<nav id="nav">
+<button data-p="home" class="on">الرئيسية</button><button data-p="rules">القوانين</button><button data-p="var">نظام VAR</button><button data-p="sched">المواعيد</button><button data-p="apply">طلب دخول</button><button data-p="myreq" id="myBtn" class="hide">طلباتي<i class="dot" id="myDot"></i></button><button data-p="admin" id="adminBtn" class="hide">الإدارة<i class="dot" id="admDot"></i></button>
+<span class="onl" title="المتصلون الآن"><i></i><b id="onlN">0</b><span>متصل</span></span>
+<a class="dc" href="https://discord.gg/MxnXaMH88W" target="_blank" rel="noopener">◉ Discord</a>
+<div id="uchip"><img id="uav" alt=""><span id="uname"></span><a href="/api/logout">خروج</a></div></nav>
+<button id="bell" aria-label="الإشعارات"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><em id="bellN" class="hide">0</em></button>
+
+<section class="pg on" id="home"><div class="hero rv"><span class="pill">🎮 بطولة ترفيهية · بدون جوائز</span><h1 class="grad">بطولة كلانات Rocket League</h1><p>كلان ضد كلان · نظام VAR احترافي · 1v1 · 2v2 · 3v3 — سجّل كلانك الآن وادخل الساحة.</p>
+<div class="row cta"><button class="big" onclick="go('apply')">قدّم طلب دخول</button><button class="btn" onclick="go('sched')">المواعيد</button><button class="btn" onclick="go('var')">نظام VAR</button></div></div>
+<div class="stats rv"><div class="st"><b id="c_on">0</b><span>متصل الآن</span></div><div class="st"><b id="c_mem">0</b><span>لاعب مسجّل</span></div><div class="st"><b id="c_m">0</b><span>ماتش قادم</span></div><div class="st"><b id="c_r">0</b><span>قانون</span></div></div>
+<div id="nextMatch"></div>
+<h2 class="gh rv sec">أنماط اللعب</h2>
+<div class="grid"><div class="card rv mcard"><h2>1v1</h2><p class="muted">مواجهات فردية بين قادة الكلانات.</p></div><div class="card rv mcard"><h2>2v2</h2><p class="muted">ثنائيات متناغمة وتكتيك سريع.</p></div><div class="card rv mcard"><h2>3v3</h2><p class="muted">القتال الكامل بين الكلانات.</p></div></div>
+<h2 class="gh rv sec">آخر الأحداث</h2><div class="card feed rv" id="homeFeed"></div>
+<div class="card rv"><h2>VAR</h2><p class="muted">كل ماتش يُسجَّل ويُراجَع بواسطة VAR، مع بث مباشر أو تسجيل لكل جولة. <a href="#" onclick="go('var');return false" style="color:#e8c872">اقرأ قوانين VAR ←</a></p></div>
+<div class="card rv"><h2>الشرط الأساسي</h2><p class="muted">رانك Gold 2 أو أعلى في 1v1 أو 2v2 (3v3 اختياري). البطولة ترفيهية فقط ولا توجد جوائز.</p></div></section>
 
 <section class="pg" id="rules"><h1 class="grad rv">القوانين</h1><div id="rulesList"></div></section>
 
-<section class="pg" id="var"><h1 class="grad rv">نظام VAR</h1>
-<div class="card rv rule"><div class="n">1</div><div>VAR يراقب الماتش بالكامل، وأي تفجير بعد النقطة التي يحددها VAR يُعاقَب عليه اللاعب الذي فجّر، ويحدد VAR العقاب.</div></div>
-<div class="card rv rule"><div class="n">2</div><div>يُسمح بالتفجير والزق (Bump) في السيارات في نصف الملعب أو قبل النقطة المحددة بواسطة VAR.</div></div>
-<div class="card rv rule"><div class="n">3</div><div>يمكن تقديم شكوى لـ VAR لطلب مراجعة في لحظة معينة.</div></div>
-<div class="card rv rule"><div class="n">4</div><div>يتم تسجيل الماتش كاملًا، مع بث مباشر أو تسجيل فيديو للجولة.</div></div>
-<div class="card rv rule"><div class="n">5</div><div>تُحدَّد مواعيد مخصصة لكل فريق (1v1 / 2v2 / 3v3) وتظهر على الموقع وسيرفر الديسكورد.</div></div></section>
+<section class="pg" id="var"><h1 class="grad rv">نظام VAR</h1><p class="muted rv">كل قرار يُراجَع بالدليل، وكل مراجعة تمر بأربع مراحل واضحة.</p>
+<div class="vtl rv"><div><b>1</b>شكوى<small>خلال 10 دقائق</small></div><div><b>2</b>مراجعة<small>التسجيل والدقيقة</small></div><div><b>3</b>قرار VAR<small>نهائي</small></div><div><b>4</b>تنفيذ<small>العقوبة إن وُجدت</small></div></div>
+<div id="varList"></div></section>
 
 <section class="pg" id="sched"><h1 class="grad rv">المواعيد</h1><div id="schedList"></div></section>
 
 <section class="pg" id="apply"><h1 class="grad rv">طلب دخول</h1>
 <div class="card rv"><div class="row"><span id="meTxt" class="muted">جارٍ التحقق...</span><button class="btn sm" id="linkBtn">ربط حساب Discord</button></div></div>
-<div id="applyBox"><div class="card rv"><label>اسم الكلان</label><input id="f_clan"><label>اسم حسابك</label><input id="f_acc"><label>اسم رئيس الكلان</label><input id="f_lead">
-<label>الرانك الحالي (يجب Gold 2 أو أعلى)</label><input type="hidden" id="f_rank"><div class="ranks" id="ranks"><button type="button" class="rk" data-v="Gold 2" style="--t:#d9a93a"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Gold 2</b></button><button type="button" class="rk" data-v="Gold 3" style="--t:#f0c14b"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Gold 3</b></button><button type="button" class="rk" data-v="Platinum 1+" style="--t:#8fd3e8"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Platinum 1+</b></button><button type="button" class="rk" data-v="Diamond+" style="--t:#5b9dff"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Diamond+</b></button><button type="button" class="rk" data-v="Champion+" style="--t:#b46bff"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Champion+</b></button><button type="button" class="rk" data-v="Grand Champion+" style="--t:#ff4d5e"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Grand Champion+</b></button></div>
-<label>أسماء أعضاء الكلان المشاركين</label><textarea id="f_mem" rows="2"></textarea>
-<label>منذ متى تلعب Rocket League؟</label><input id="f_since"><label>الجوائز التي حصل عليها الكلان</label><input id="f_prize">
-<label>أيام تواجدك</label><input id="f_days"><label>صورة إثبات الرانك (إجباري)</label><input type="file" id="f_img" accept="image/*"><img id="prev" class="th hide">
+<div id="applyNote"></div>
+<div id="applyBox"><div class="card rv"><label>اسم الكلان</label><input id="f_clan" maxlength="60"><label>اسم حسابك</label><input id="f_acc" maxlength="60"><label>اسم رئيس الكلان</label><input id="f_lead" maxlength="60">
+<label>الرانك الحالي (يجب Gold 2 أو أعلى)</label><input type="hidden" id="f_rank"><div class="ranks" id="ranks">
+<button type="button" class="rk" data-v="Gold 2" style="--t:#d9a93a"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Gold 2</b></button><button type="button" class="rk" data-v="Gold 3" style="--t:#f0c14b"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Gold 3</b></button><button type="button" class="rk" data-v="Platinum 1+" style="--t:#8fd3e8"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Platinum 1+</b></button><button type="button" class="rk" data-v="Diamond+" style="--t:#5b9dff"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Diamond+</b></button><button type="button" class="rk" data-v="Champion+" style="--t:#b46bff"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Champion+</b></button><button type="button" class="rk" data-v="Grand Champion+" style="--t:#ff4d5e"><svg viewBox="0 0 24 24"><path d="M12 1.5l8.5 7.5L12 22.5 3.5 9z"/><path d="M3.5 9h17M12 1.5L8.5 9 12 22.5 15.5 9z" class="fc"/></svg><b>Grand Champion+</b></button></div>
+<label>أسماء أعضاء الكلان المشاركين</label><textarea id="f_mem" rows="2" maxlength="400"></textarea>
+<label>منذ متى تلعب Rocket League؟</label><input id="f_since" maxlength="60"><label>أيام تواجدك</label><input id="f_days" maxlength="120"><label>صورة إثبات الرانك (إجباري)</label><input type="file" id="f_img" accept="image/*"><img id="prev" class="th hide">
 <label>نمط المشاركة</label><div class="grid" id="modes"><div class="card mode" data-m="1v1">1v1</div><div class="card mode" data-m="2v2">2v2</div><div class="card mode" data-m="3v3">3v3</div></div>
-<button class="big" id="sendApp">إرسال الطلب</button></div></div>
-<div id="myApp"></div></section>
+<button class="big" id="sendApp">إرسال الطلب</button></div></div></section>
+
+<section class="pg" id="myreq"><h1 class="grad rv">طلباتي</h1><div id="myApp"></div></section>
 
 <section class="pg" id="admin"><h1 class="grad rv">لوحة الإدارة</h1>
-<div class="row"><button class="btn sm" data-a="a_apps">الطلبات</button><button class="btn sm" data-a="a_vis">الإحداثيات</button><button class="btn sm" data-a="a_sch">المواعيد</button><button class="btn sm" data-a="a_rul">القوانين</button><button class="btn sm" data-a="a_log">السجل</button></div>
+<div class="row"><button class="btn sm go" data-a="a_apps">الطلبات</button><button class="btn sm" data-a="a_vis">الإحداثيات</button><button class="btn sm" data-a="a_sch">المواعيد</button><button class="btn sm" data-a="a_rul">القوانين</button><button class="btn sm" data-a="a_log">السجل</button></div>
 <div id="a_apps" class="ap"></div><div id="a_vis" class="ap hide"></div>
-<div id="a_sch" class="ap hide"><div class="card"><label>الكلان الأول</label><input id="s1"><label>الكلان الثاني</label><input id="s2"><label>النمط</label><select id="sm"><option>1v1</option><option>2v2</option><option>3v3</option></select><label>التاريخ والساعة</label><input type="datetime-local" id="sd"><label>اسم الغرفة</label><input id="sr"><label>الباسورد</label><input id="sp"><label>صورة الكلان 1 / 2</label><input type="file" id="si1" accept="image/*"><input type="file" id="si2" accept="image/*"><button class="big" id="addS">إضافة موعد</button></div><div id="a_schL"></div></div>
+<div id="a_sch" class="ap hide"><div class="card"><label>الكلان الأول</label><input id="s1"><label>الكلان الثاني</label><input id="s2"><label>النمط</label><select id="sm"><option>1v1</option><option>2v2</option><option>3v3</option></select><label>التاريخ والساعة</label><input type="datetime-local" id="sd"><label>اسم الغرفة</label><input id="sr"><label>الباسورد</label><input id="sp"><label>صورة الكلان الأول</label><input type="file" id="si1" accept="image/*"><label>صورة الكلان الثاني</label><input type="file" id="si2" accept="image/*"><button class="big" id="addS">إضافة موعد</button></div><div id="a_schL"></div></div>
 <div id="a_rul" class="ap hide"><div class="card"><textarea id="rt" rows="2" placeholder="نص القانون"></textarea><button class="big" id="addR">إضافة قانون</button></div><div id="a_rulL"></div></div>
 <div id="a_log" class="ap hide"></div></section>
-<footer>POWERED BY <b>MMH</b></footer>
+<footer>POWERED BY <b>MMH</b><button class="replay" id="replay">▶ إعادة الدخلة</button></footer>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const BASE=[["الانضمام والتسجيل", ["الحد الأدنى للرانك Gold 2 في 1v1 أو 2v2، ويجب أن تطابق صورة الإثبات الرانك المكتوب في الطلب.", "لكل كلان قائد واحد مسؤول عن التواصل مع الإدارة، ولا يتغير القائد إلا بموافقتها.", "ممنوع الحسابات الثانية (Smurf) أو لعب شخص بحساب غيره، وأي تلاعب بالرانك يعني استبعاد الكلان.", "يحق لكل كلان لاعب احتياطي واحد لكل نمط، ويُعلَن اسمه للإدارة قبل الماتش."]], ["قبل الماتش", ["الحضور في الديسكورد قبل الموعد بـ 10 دقائق، والتأخر أكثر من 10 دقائق عن الموعد = خسارة بالانسحاب.", "الغرفة والباسورد يظهران في صفحة المواعيد فقط، ويُمنع مشاركتهما مع أي شخص خارج الماتش.", "يُلعب الماتش بالإعدادات الافتراضية للعبة على الساحة التي تحددها الإدارة، بدون أي Mutators.", "ثلاث غيابات أو انسحابات بدون عذر = استبعاد الكلان من البطولة."]], ["داخل الماتش", ["مدة الماتش 5 دقائق، والتعادل يُحسم بوقت إضافي حتى الهدف الذهبي.", "الأدوار الأولى Best of 1، والأدوار الإقصائية Best of 3، ما لم تعلن الإدارة غير ذلك.", "عند انقطاع الاتصال تُمنح مهلة 5 دقائق للعودة، وإن كان فريقه متقدمًا يُكمَل الماتش بنفس النتيجة والوقت.", "ممنوع أي برامج مساعدة أو سكربتات أو استغلال ثغرات، والعقوبة استبعاد فوري."]], ["VAR والاعتراضات", ["كل فريق مسؤول عن تسجيل جولته؛ لا يُقبل أي اعتراض على ماتش بلا تسجيل أو بث.", "يُقدَّم الاعتراض خلال 10 دقائق من نهاية الماتش، مع الدقيقة المحددة، عبر الشات في طلبك أو تذكرة الديسكورد.", "قرار VAR نهائي، ومن يشكك فيه علنًا يتعرض للعقوبة."]], ["السلوك والجوائز", ["الاحترام واجب: السب والاستفزاز والتقليل من الخصم يُعاقَب بإنذار ثم خصم نقاط ثم استبعاد.", "تُسلَّم الجوائز بعد انتهاء البطولة ومراجعة الإدارة لكل الماتشات.", "تحتفظ الإدارة بحق تعديل القوانين، وأي تعديل يظهر على الموقع بإشعار فوري."]]];
-const ADMIN_IDS=["1510646428559610068","1465120916794249287"];
-let db=null,me=null,isAdm=false,S={rules:[],sched:[],apps:[],vis:[],logs:[]},first={},mode="",dcName="";
-(()=>{const sp=$("#splash"),t=$("#sT");"RL ARENA".split("").forEach((c,i)=>{const e=document.createElement("span");e.textContent=c===" "?"\u00a0":c;e.style.animationDelay=(2.5+i*.08)+"s";t.appendChild(e)});
-let done=0;const end=()=>{if(done)return;done=1;sp.classList.add("open");setTimeout(()=>sp.remove(),1400)};$("#skip").onclick=end;setTimeout(end,5200)})();
-function go(p){$$(".pg").forEach(e=>e.classList.toggle("on",e.id===p));$$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));scrollTo(0,0);setTimeout(rv,50)}
-$$("nav button").forEach(b=>b.onclick=()=>go(b.dataset.p));
-const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("in")),{threshold:.1});
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const ICON={join:"👤",visit:"🚪",apply:"📝",accepted:"🏆",rule_add:"📜",rule_edit:"✏️",rule_del:"🗑️",sched_add:"📅",sched_del:"❌"};
+// ===== المحتوى =====
+const VAR=[
+["VAR يراقب الماتش بالكامل، وأي تفجير بعد النقطة التي يحددها VAR يُعاقَب عليه اللاعب الذي فجّر، ويحدد VAR العقاب.","VAR يراقب كل الماتش من أوله لآخره"],
+["يُسمح بالتفجير والزق (Bump) في السيارات في نصف الملعب أو قبل النقطة المحددة بواسطة VAR.","التفجير والزق مسموحين قبل نقطة VAR فقط"],
+["يمكن تقديم شكوى لـ VAR لطلب مراجعة في لحظة معينة، خلال 10 دقائق من نهاية الماتش مع ذكر الدقيقة.","من حقك تطلب مراجعة VAR في لحظة معينة"],
+["يتم تسجيل الماتش كاملًا، مع بث مباشر أو تسجيل فيديو للجولة، ولا تُقبل أي شكوى بلا دليل مصوَّر.","الماتش يتسجّل كامل — بلا تسجيل بلا شكوى"],
+["قرار VAR نهائي، ولا يُناقَش علنًا أمام اللاعبين أو في الشات العام؛ الاعتراض يكون عبر الإدارة فقط.","قرار VAR نهائي ولا يُناقَش علنًا"],
+["العقوبات تصاعدية: تحذير، ثم خصم نقاط، ثم خسارة الجولة، ثم الاستبعاد، ويحق لـ VAR القفز لعقوبة أعلى في المخالفات الجسيمة.","العقوبات تصاعدية: تحذير ← خصم ← خسارة ← استبعاد"],
+["رفض مشاركة التسجيل أو إخفاؤه عند طلب VAR يُعتبر خسارة بالانسحاب.","إخفاء التسجيل = خسارة بالانسحاب"],
+["لا يُلغى هدف إلا إذا ثبتت مخالفة واضحة قبل الهدف مباشرة، وفي حالة الشك يُحتسب الهدف.","الشك دايمًا لصالح الهدف"],
+["تُحدَّد مواعيد مخصصة لكل فريق (1v1 / 2v2 / 3v3) وتظهر على الموقع وسيرفر الديسكورد.","المواعيد تظهر على الموقع وسيرفر الديسكورد"]];
+const BASE=[["الانضمام والتسجيل",["الحد الأدنى للرانك Gold 2 في 1v1 أو 2v2، ويجب أن تطابق صورة الإثبات الرانك المكتوب في الطلب.","لكل كلان قائد واحد مسؤول عن التواصل مع الإدارة، ولا يتغير القائد إلا بموافقتها.","ممنوع الحسابات الثانية (Smurf) أو لعب شخص بحساب غيره، وأي تلاعب بالرانك يعني استبعاد الكلان.","يحق لكل كلان لاعب احتياطي واحد لكل نمط، ويُعلَن اسمه للإدارة قبل الماتش."]],["قبل الماتش",["الحضور في الديسكورد قبل الموعد بـ 10 دقائق، والتأخر أكثر من 10 دقائق عن الموعد = خسارة بالانسحاب.","الغرفة والباسورد يظهران في صفحة المواعيد فقط، ويُمنع مشاركتهما مع أي شخص خارج الماتش.","يُلعب الماتش بالإعدادات الافتراضية للعبة على الساحة التي تحددها الإدارة، بدون أي Mutators.","ثلاث غيابات أو انسحابات بدون عذر = استبعاد الكلان من البطولة."]],["داخل الماتش",["مدة الماتش 5 دقائق، والتعادل يُحسم بوقت إضافي حتى الهدف الذهبي.","الأدوار الأولى Best of 1، والأدوار الإقصائية Best of 3، ما لم تعلن الإدارة غير ذلك.","عند انقطاع الاتصال تُمنح مهلة 5 دقائق للعودة، وإن كان فريقه متقدمًا يُكمَل الماتش بنفس النتيجة والوقت.","ممنوع أي برامج مساعدة أو سكربتات أو استغلال ثغرات، والعقوبة استبعاد فوري."]],["VAR والاعتراضات",["كل فريق مسؤول عن تسجيل جولته؛ لا يُقبل أي اعتراض على ماتش بلا تسجيل أو بث.","يُقدَّم الاعتراض خلال 10 دقائق من نهاية الماتش، مع الدقيقة المحددة، عبر الشات في طلبك أو تذكرة الديسكورد.","قرار VAR نهائي، ومن يشكك فيه علنًا يتعرض للعقوبة."]],["السلوك والروح الرياضية",["الاحترام واجب: السب والاستفزاز والتقليل من الخصم يُعاقَب بإنذار ثم خصم نقاط ثم استبعاد.","البطولة ترفيهية فقط وبدون أي جوائز؛ الهدف المتعة والمنافسة الشريفة.","تحتفظ الإدارة بحق تعديل القوانين، وأي تعديل يظهر على الموقع بإشعار فوري للجميع."]]];
+// ===== الحالة =====
+let me=null,isAdm=false,mode="",ver=-1,hbAt=0,fullAt=0,booted=false,busy=false,again=false,noRedisShown=false,curPage="home";
+const S={rules:[],sched:[],apps:[],vis:[],logs:[],events:[],online:0,onlineIds:[],members:0};
+const M={},seenLen={},IMG={},PEND={},CL={},seenEv=new Set();let evInit=false;
+const memo=(k,d,f)=>{const s=JSON.stringify(d);if(M[k]===s)return;M[k]=s;f()};
+const ago=t=>{const s=Math.max(0,(Date.now()-(t||0))/1e3);return s<45?"الآن":s<3600?"منذ "+Math.round(s/60)+" دقيقة":s<86400?"منذ "+Math.round(s/3600)+" ساعة":"منذ "+Math.round(s/86400)+" يوم"};
+const fmt=t=>t?new Date(t).toLocaleString("ar-EG",{weekday:"long",day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"}):"-";
+const fmtS=t=>t?new Date(t).toLocaleString("ar-EG"):"-";
+// ===== الدخلة (30 ثانية) =====
+(()=>{const sp=$("#splash");if(!sp)return;let seen=0;try{seen=sessionStorage.getItem("intro")}catch(e){}
+if(seen){sp.remove();return}
+const t=$("#sT");"RL ARENA".split("").forEach((c,i)=>{const e=document.createElement("span");e.textContent=c===" "?"\u00a0":c;e.style.animationDelay=(2.5+i*.08)+"s";t.appendChild(e)});
+$("#introVar").innerHTML=VAR.slice(0,6).map((v,i)=>`<li class="it" style="--d:${(.9+i*1.3).toFixed(2)}s"><em>${i+1}</em><span>${esc(v[1])}</span></li>`).join("");
+const sc=$$("#splash .sc"),dots=$$("#splash .dots i"),cap=$("#scap"),T=[0,6,11,22,27],N=["01 · الافتتاح","02 · نظام البطولة","03 · قوانين VAR","04 · وأكتر من كده","05 · جاهز؟"],tm=[];let done=0,t0=Date.now();
+const show=i=>{sc.forEach((e,k)=>e.classList.toggle("on",k===i));dots.forEach((d,k)=>d.classList.toggle("on",k<=i));cap.textContent=N[i]};
+show(0);T.forEach((s,i)=>i&&tm.push(setTimeout(()=>show(i),s*1e3)));
+const tcI=setInterval(()=>{const el=$("#tc");if(!el)return;const d=Math.max(0,Date.now()-t0-11e3),p=n=>String(n).padStart(2,"0");el.textContent=`00:${p(Math.floor(d/6e4)%60)}:${p(Math.floor(d/1e3)%60)}:${p(Math.floor(d/40)%25)}`},80);
+const end=()=>{if(done)return;done=1;tm.forEach(clearTimeout);clearInterval(tcI);try{sessionStorage.setItem("intro","1")}catch(e){}sp.classList.add("open");setTimeout(()=>sp.remove(),1500)};
+tm.push(setTimeout(end,29e3));$("#skip").onclick=end})();
+// ===== تنقّل وتأثيرات =====
+function go(p){if(p==="myreq"&&!me)return toast("سجّل دخولك الأول","🔒");if(p==="admin"&&!isAdm)return;curPage=p;
+$$(".pg").forEach(e=>e.classList.toggle("on",e.id===p));$$("nav button[data-p]").forEach(b=>b.classList.toggle("on",b.dataset.p===p));$("#drawer").classList.remove("on");scrollTo(0,0);setTimeout(rv,50);
+if(p==="myreq"||p==="admin")markChats();if(p==="home")rHome()}
+$$("nav button[data-p]").forEach(b=>b.onclick=()=>go(b.dataset.p));
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("in")),{threshold:.08});
 function rv(){$$(".rv:not(.in)").forEach(e=>io.observe(e))}rv();
-function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),3500)}
+function toast(t,ic="✦"){const c=$("#toasts"),e=document.createElement("div");e.className="tt";e.innerHTML=`<i>${ic}</i><span>${esc(t)}</span><u></u>`;c.prepend(e);requestAnimationFrame(()=>requestAnimationFrame(()=>e.classList.add("on")));setTimeout(()=>{e.classList.remove("on");setTimeout(()=>e.remove(),600)},5200);while(c.children.length>4)c.lastChild.remove()}
+document.addEventListener("pointerdown",e=>{const b=e.target.closest?.(".btn,.big,nav button,.dcb");if(!b)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height)/2,s=document.createElement("span");s.className="rp";s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),700)});
+document.addEventListener("pointermove",e=>{const m=e.target.closest?.(".match");if(!m)return;const r=m.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;m.style.setProperty("--mx",x*100+"%");m.style.setProperty("--my",y*100+"%");m.style.setProperty("--ry",((x-.5)*5)+"deg");m.style.setProperty("--rx",((.5-y)*4)+"deg")});
+document.addEventListener("pointerout",e=>{const m=e.target.closest?.(".match");if(m&&!m.contains(e.relatedTarget)){m.style.setProperty("--rx","0deg");m.style.setProperty("--ry","0deg")}});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.id?.startsWith("cm_")){const m=e.target.id.match(/^cm_([ua])(.+)$/);if(m)sendMsg(m[2],m[1])}});
 // particles
 (()=>{const c=$("#cv"),x=c.getContext("2d");let W,H,P=[];const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight};rs();onresize=rs;
 for(let i=0;i<70;i++)P.push({x:Math.random()*2e3,y:Math.random()*2e3,r:Math.random()*2+.5,v:Math.random()*.6+.2,h:36+Math.random()*16});
 (function f(){x.clearRect(0,0,W,H);P.forEach(p=>{p.y-=p.v;p.x+=Math.sin(p.y/60)*.3;if(p.y<0){p.y=H;p.x=Math.random()*W}x.fillStyle=`hsla(${p.h},100%,65%,.7)`;x.beginPath();x.arc(p.x%W,p.y,p.r,0,7);x.fill()});requestAnimationFrame(f)})()})();
 $$(".mode").forEach(m=>m.onclick=()=>{$$(".mode").forEach(x=>x.classList.remove("sel"));m.classList.add("sel");mode=m.dataset.m});
-function img(file,w=420){return new Promise(r=>{if(!file)return r("");const i=new Image,u=URL.createObjectURL(file);i.onload=()=>{const k=Math.min(1,w/i.width),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;c.getContext("2d").drawImage(i,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",.6))};i.src=u})}
-$("#f_img").onchange=async e=>{const p=await img(e.target.files[0]);$("#prev").src=p;$("#prev").classList.remove("hide")};
-const fmt=t=>t?new Date(t).toLocaleString("ar-EG"):"-";
-// render
-function rRules(){let k=0;const bh=BASE.map(([g,l])=>`<h2 class="gh rv">${g}</h2>`+l.map(t=>`<div class="card rv rule"><div class="n">${++k}</div><div>${t}</div></div>`).join("")).join("");
-$("#rulesList").innerHTML=bh+(S.rules.length?'<h2 class="gh rv">قوانين إضافية من الإدارة</h2>'+S.rules.map(r=>`<div class="card rv rule"><div class="n">${++k}</div><div>${esc(r.text)}</div></div>`).join(""):"");rv();
-$("#a_rulL").innerHTML=S.rules.map(r=>`<div class="card row">${esc(r.text)}<button class="btn sm" onclick="del('rules','${r.id}')">حذف</button><button class="btn sm" onclick="editR('${r.id}')">تعديل</button></div>`).join("")}
-function rSched(){const L=[...S.sched].sort((a,b)=>(a.when||"")>(b.when||"")?1:-1);
-$("#schedList").innerHTML=L.length?L.map(s=>`<div class="card rv"><div class="row" style="justify-content:space-between;text-align:center"><div>${s.i1?`<img class="th" style="max-width:70px" src="${s.i1}">`:""}<h2>${esc(s.c1)}</h2></div><div><span class="tag">${esc(s.mode)}</span><h2 class="grad">VS</h2></div><div>${s.i2?`<img class="th" style="max-width:70px" src="${s.i2}">`:""}<h2>${esc(s.c2)}</h2></div></div><p class="muted">🕒 ${fmt(s.when)}</p><p>🏠 الغرفة: <b>${esc(s.room)}</b> · 🔑 <b>${esc(s.pass)}</b></p></div>`).join(""):'<div class="card muted">لا توجد مواعيد حالياً.</div>';rv();
-$("#a_schL").innerHTML=L.map(s=>`<div class="card row">${esc(s.c1)} vs ${esc(s.c2)} · ${esc(s.mode)} · ${fmt(s.when)}<button class="btn sm" onclick="del('schedule','${s.id}')">حذف</button></div>`).join("")}
-function myApp(){const a=S.apps.find(x=>x.id===me?.id);const b=$("#myApp");if(!a){b.innerHTML="";$("#applyBox").classList.remove("hide");return}
-$("#applyBox").classList.add("hide");b.innerHTML=`<div class="card"><h2>طلبك: ${esc(a.clan)} <span class="tag ${a.status==="accepted"?"ok":a.status==="rejected"?"no":"pe"}">${{accepted:"مقبول",rejected:"مرفوض",review:"قيد المراجعة"}[a.status]||"قيد المراجعة"}</span></h2><p class="muted">النمط: ${esc(a.mode)}</p>${a.chatOpen?chatHtml(a,"u"):'<p class="muted">الشات مغلق.</p>'}${a.chatOpen?"":`<button class="btn" onclick="openChat('${a.id}')">فتح الشات مع الإدارة</button>`}</div>`}
-function chatHtml(a,w){return `<div class="msgs">${(a.chat||[]).map(m=>`<div class="${m.adm?"adm":""}">${esc(m.t)}</div>`).join("")}</div><div class="row"><input id="cm_${a.id}" placeholder="اكتب رسالة" style="flex:1"><button class="btn sm" onclick="sendMsg('${a.id}',${w==="a"})">إرسال</button></div>`}
-function rApps(){$("#a_apps").innerHTML=S.apps.map(a=>`<div class="card"><h2>${esc(a.clan)} <span class="tag">${esc(a.mode)}</span> <span class="tag ${a.status==="accepted"?"ok":a.status==="rejected"?"no":"pe"}">${a.status||"review"}</span></h2><p>الحساب: ${esc(a.acc)} · الرئيس: ${esc(a.lead)} · الرانك: ${esc(a.rank)}<br>الأعضاء: ${esc(a.mem)}<br>منذ: ${esc(a.since)} · الجوائز: ${esc(a.prize)} · الأيام: ${esc(a.days)}<br>Discord: ${esc(a.dc||"-")} (${esc(a.id)})</p>${a.img?`<img class="th" src="${a.img}">`:""}<div class="row"><button class="btn sm" onclick="setSt('${a.id}','accepted')">قبول</button><button class="btn sm" onclick="setSt('${a.id}','rejected')">رفض</button><button class="btn sm" onclick="setSt('${a.id}','review')">قيد المراجعة</button>${a.chatOpen?`<button class="btn sm" onclick="closeChat('${a.id}')">إغلاق الشات</button>`:`<button class="btn sm" onclick="openChat('${a.id}')">فتح الشات</button>`}</div>${a.chatOpen?chatHtml(a,"a"):""}</div>`).join("")||'<div class="card muted">لا طلبات.</div>'}
-function rVis(){const on=Date.now()-60000;$("#a_vis").innerHTML=`<div class="card">عدد المسجلين: <b>${S.vis.length}</b> · المتصلون الآن: <b>${S.vis.filter(v=>v.seen>on).length}</b></div>`+S.vis.map(v=>`<div class="card">${esc(v.name)} · Discord: ${esc(v.dc||"-")} · ID: ${esc(v.id)}<br><span class="muted">أول دخول: ${fmt(v.first)} · آخر ظهور: ${fmt(v.seen)}</span> <span class="tag ${v.seen>on?"ok":"no"}">${v.seen>on?"فاتح الموقع":"مغلق"}</span></div>`).join("")}
-function rLog(){$("#a_log").innerHTML=S.logs.map(l=>`<div class="card"><b>${esc(l.clan)}</b> · ${fmt(l.closed)}<p class="muted">${esc(l.mode)} · ${esc(l.acc)} · ${esc(l.rank)} · ${esc(l.mem)}</p><div class="msgs">${(l.chat||[]).map(m=>`<div class="${m.adm?"adm":""}">${esc(m.t)}</div>`).join("")}</div></div>`).join("")||'<div class="card muted">السجل فارغ.</div>'}
-// actions
-const col=n=>db.collection(n);
-window.del=async(c,id)=>{if(isAdm&&confirm("تأكيد الحذف؟"))await col(c).doc(id).delete()};
-window.editR=async id=>{const r=S.rules.find(x=>x.id===id),t=prompt("عدّل القانون",r.text);if(t)await col("rules").doc(id).update({text:t,ts:Date.now()})};
-window.setSt=(id,s)=>col("applications").doc(id).update({status:s});
-window.openChat=id=>col("applications").doc(id).update({chatOpen:true});
-window.sendMsg=async(id,adm)=>{const i=$("#cm_"+id),t=i.value.trim();if(!t)return;const a=S.apps.find(x=>x.id===id);await col("applications").doc(id).update({chat:[...(a.chat||[]),{t,adm,ts:Date.now()}]})};
-window.closeChat=async id=>{const a=S.apps.find(x=>x.id===id);await col("logs").doc(id+"_"+Date.now()).set({...a,closed:Date.now()});await col("applications").doc(id).update({chatOpen:false,chat:[]})};
-$("#addR").onclick=async()=>{const t=$("#rt").value.trim();if(!t)return;await col("rules").doc("r"+Date.now()).set({text:t,ts:Date.now()});$("#rt").value=""};
-$("#addS").onclick=async()=>{const d=$("#sd").value;if(!$("#s1").value||!$("#s2").value||!d)return toast("أكمل البيانات");await col("schedule").doc("s"+Date.now()).set({c1:$("#s1").value,c2:$("#s2").value,mode:$("#sm").value,when:d,room:$("#sr").value,pass:$("#sp").value,i1:await img($("#si1").files[0],160),i2:await img($("#si2").files[0],160)});toast("تمت الإضافة")};
-$("#sendApp").onclick=async()=>{if(!me?.id)return toast("يجب تسجيل الدخول");const v=i=>$("#"+i).value.trim(),f=$("#f_img").files[0];
-if(!v("f_clan")||!v("f_acc")||!v("f_lead")||!v("f_rank")||!mode)return toast("أكمل البيانات واختر الرانك والنمط");if(!f)return toast("صورة الرانك إجبارية");
-await col("applications").doc(me.id).set({clan:v("f_clan"),acc:v("f_acc"),lead:v("f_lead"),rank:v("f_rank"),mem:v("f_mem"),since:v("f_since"),prize:v("f_prize"),days:v("f_days"),mode,img:await img(f,520),status:"review",dc:dcName,chat:[],chatOpen:false,ts:Date.now()});{toast("تم إرسال طلبك");setTimeout(()=>col("applications").doc(me.id).get().then(()=>{}),0)}};
+function img(file,w=420,q=.6){return new Promise(r=>{if(!file)return r("");const i=new Image,u=URL.createObjectURL(file);i.onload=()=>{const k=Math.min(1,w/i.width),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;c.getContext("2d").drawImage(i,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",q))};i.onerror=()=>r("");i.src=u})}
+$("#f_img").onchange=async e=>{const p=await img(e.target.files[0],520);$("#prev").src=p;$("#prev").classList.remove("hide")};
+window.zoom=src=>{const z=document.createElement("div");z.id="zoom";z.innerHTML=`<img src="${src}">`;z.onclick=()=>z.remove();document.body.appendChild(z)};
+window.cp=el=>{const v=el.dataset.v;try{navigator.clipboard.writeText(v);toast("تم النسخ: "+v,"📋")}catch(e){toast(v,"📋")}};
+function countTo(el,n){if(!el)return;const from=+el.dataset.n||0;if(el.dataset.n===String(n))return;el.dataset.n=n;const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/900),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(n-from)*e);if(k<1)requestAnimationFrame(f)})(t0)}
+// ===== الرسم =====
+function rVar(){$("#varList").innerHTML=VAR.map((v,i)=>`<div class="card rv rule"><div class="n">${i+1}</div><div>${esc(v[0])}</div></div>`).join("");rv()}
+function rRules(){memo("rules",S.rules,()=>{let k=0;const bh=BASE.map(([g,l])=>`<h2 class="gh rv">${g}</h2>`+l.map(t=>`<div class="card rv rule"><div class="n">${++k}</div><div>${esc(t)}</div></div>`).join("")).join("");
+const ex=S.rules.slice().sort((a,b)=>(a.ts||0)-(b.ts||0));
+$("#rulesList").innerHTML=bh+(ex.length?'<h2 class="gh rv">قوانين إضافية من الإدارة</h2>'+ex.map(r=>`<div class="card rv rule"><div class="n">${++k}</div><div>${esc(r.text)}</div></div>`).join(""):"");rv();
+$("#a_rulL").innerHTML=ex.map(r=>`<div class="card row">${esc(r.text)}<button class="btn sm" onclick="del('rules','${r.id}')">حذف</button><button class="btn sm" onclick="editR('${r.id}')">تعديل</button></div>`).join("")});$("#c_r")&&countTo($("#c_r"),BASE.reduce((a,b)=>a+b[1].length,0)+S.rules.length)}
+const stOf=s=>{const t=+new Date(s.when),n=Date.now();return n<t?"up":n<t+2400000?"live":"end"};
+const logo=(i,n)=>i?`<img src="${i}" alt="">`:`<span>${esc([...(n||"?")][0]||"?")}</span>`;
+function matchHtml(s){const t=+new Date(s.when),st=stOf(s),L={up:"⏳ قريبًا",live:"🔴 يُلعب الآن",end:"انتهى"}[st];
+const cd=st==="up"?`<div class="cd"><div><b>00</b><small>يوم</small></div><div><b>00</b><small>ساعة</small></div><div><b>00</b><small>دقيقة</small></div><div><b>00</b><small>ثانية</small></div></div>`:`<div class="cdx">${st==="live"?"🔥 الماتش شغّال دلوقتي — ادخل الغرفة!":"انتهى موعد هذه المباراة"}</div>`;
+return `<div class="match rv ${st}" data-t="${t}" data-st="${st}"><div class="mtop"><span class="mmode">${esc(s.mode)}</span><span class="mst">${L}</span></div>
+<div class="mbody"><div class="team"><div class="mlogo">${logo(s.i1,s.c1)}</div><h3>${esc(s.c1)}</h3></div><div class="vsb"><i></i><b>VS</b><i></i></div><div class="team"><div class="mlogo">${logo(s.i2,s.c2)}</div><h3>${esc(s.c2)}</h3></div></div>
+${cd}<div class="mmeta"><span>🕒 ${fmt(s.when)}</span>${s.room?`<span class="cp" data-v="${esc(s.room)}" onclick="cp(this)">🏠 الغرفة <b>${esc(s.room)}</b> ⧉</span>`:""}${s.pass?`<span class="cp" data-v="${esc(s.pass)}" onclick="cp(this)">🔑 <b>${esc(s.pass)}</b> ⧉</span>`:""}</div></div>`}
+function rSched(){memo("sched",S.sched,()=>{const A=S.sched.filter(s=>stOf(s)!=="end").sort((a,b)=>new Date(a.when)-new Date(b.when)),E=S.sched.filter(s=>stOf(s)==="end").sort((a,b)=>new Date(b.when)-new Date(a.when));
+$("#schedList").innerHTML=(A.length?A.map(matchHtml).join(""):'<div class="card emptyc rv"><div class="big-ic">📅</div><h2>لا توجد مواعيد حالياً</h2><p class="muted">أول ما الإدارة تضيف ماتش هيظهر هنا ويوصلك إشعار فوري.</p></div>')+(E.length?'<h2 class="gh rv sec">ماتشات انتهت</h2>'+E.map(matchHtml).join(""):"");rv();
+$("#a_schL").innerHTML=S.sched.slice().sort((a,b)=>new Date(a.when)-new Date(b.when)).map(s=>`<div class="card row">${esc(s.c1)} vs ${esc(s.c2)} · ${esc(s.mode)} · ${fmtS(s.when)}<button class="btn sm" onclick="del('schedule','${s.id}')">حذف</button></div>`).join("");rHome(1)});}
+function rHome(f){if(f)M.home=null;memo("home",[S.sched,S.events.slice(0,6)],()=>{const n=S.sched.filter(s=>stOf(s)!=="end").sort((a,b)=>new Date(a.when)-new Date(b.when))[0];
+$("#nextMatch").innerHTML=n?`<h2 class="gh rv sec">المباراة القادمة</h2>`+matchHtml(n):"";
+$("#homeFeed").innerHTML=S.events.length?S.events.slice(0,6).map(evHtml).join(""):'<div class="empty">لا توجد أحداث بعد — كن أول من يدخل الساحة ✦</div>';rv()});
+countTo($("#c_m"),S.sched.filter(s=>stOf(s)==="up").length);countTo($("#c_mem"),S.members);countTo($("#c_on"),S.online)}
+setInterval(()=>{let ch=0;$$(".match").forEach(m=>{const t=+m.dataset.t,n=Date.now(),st=n<t?"up":n<t+2400000?"live":"end";if(st!==m.dataset.st){ch=1;return}if(st==="up"){const d=t-n,v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];m.querySelectorAll(".cd b").forEach((b,i)=>b.textContent=String(v[i]).padStart(2,"0"))}});if(ch){M.sched=null;M.home=null;rSched();rHome(1)}},1000);
+const evHtml=e=>`<div class="ev"><i>${ICON[e.type]||"✦"}</i><div>${esc(e.text)}<small>${ago(e.ts)}</small></div></div>`;
+// ===== الإشعارات =====
+function processEvents(){const L=S.events||[];if(!evInit){L.forEach(e=>seenEv.add(e.id));evInit=true;if(!LS.get("rl_lr"))LS.set("rl_lr",Date.now());return}
+const nw=L.filter(e=>!seenEv.has(e.id)).reverse();nw.forEach(e=>seenEv.add(e.id));nw.slice(-3).forEach((e,i)=>setTimeout(()=>toast(e.text,ICON[e.type]),i*600));if(nw.length){const b=$("#bell");b.classList.remove("rung");void b.offsetWidth;b.classList.add("rung")}}
+function rBell(){const lr=+LS.get("rl_lr")||0,open=$("#drawer").classList.contains("on");if(open&&S.events[0])LS.set("rl_lr",S.events[0].ts);const un=open?0:S.events.filter(e=>e.ts>lr).length,b=$("#bellN");b.textContent=un>9?"9+":un;b.classList.toggle("hide",!un);
+$("#drawerList").innerHTML=S.events.length?S.events.map(evHtml).join(""):'<div class="empty">لا توجد أحداث بعد.</div>'}
+$("#bell").onclick=e=>{e.stopPropagation();const d=$("#drawer");d.classList.toggle("on");if(d.classList.contains("on")&&S.events[0])LS.set("rl_lr",S.events[0].ts);M.bell=null;rBell()};
+$("#drawerX").onclick=()=>$("#drawer").classList.remove("on");
+document.addEventListener("click",e=>{if(!e.target.closest("#drawer,#bell"))$("#drawer").classList.remove("on")});
+// ===== صور الإثبات (بتتحمّل لوحدها) =====
+function hydrate(){$$("[data-img]").forEach(el=>{const k=el.dataset.k;if(typeof IMG[k]==="string"&&IMG[k]){el.innerHTML=`<img class="th" src="${IMG[k]}" onclick="zoom(this.src)">`;return}if(PEND[k])return;PEND[k]=1;fetch("/api/db?c=applications&img=1&id="+encodeURIComponent(el.dataset.img),{cache:"no-store"}).then(r=>r.json()).then(j=>{IMG[k]=j.img||"";delete PEND[k];hydrate()}).catch(()=>{delete PEND[k]})})}
+// ===== طلباتي =====
+const SL={accepted:"مقبول ✓",rejected:"مرفوض",review:"قيد المراجعة"},SC=s=>s==="accepted"?"ok":s==="rejected"?"no":"pe";
+function chatHtml(a,w){const k=w+a.id,L=a.chat||[],p=seenLen[k]??L.length;seenLen[k]=L.length;
+return `<div class="chat"><header><i></i>${w==="a"?"محادثة مع "+esc(a.dc||a.lead):"شات مباشر مع الإدارة"}</header><div class="cmsgs">${L.length?L.map((m,i)=>`<div class="b ${(w==="a")===!!m.adm?"mine":""} ${i>=p?"new":""}">${esc(m.t)}<small>${m.adm?"الإدارة":esc(a.dc||"")} · ${ago(m.ts)}</small></div>`).join(""):'<div class="empty">ابدأ المحادثة ✦</div>'}</div><div class="cin"><input id="cm_${w}${a.id}" placeholder="اكتب رسالتك..." maxlength="500" autocomplete="off"><button class="btn sm go" onclick="sendMsg('${a.id}','${w}')">إرسال ➤</button></div></div>`}
+function keep(fn){const v=$$("input[id^=cm_]").map(i=>[i.id,i.value,i===document.activeElement]);fn();v.forEach(([id,val,f])=>{const i=document.getElementById(id);if(i){i.value=val;if(f){i.focus();i.setSelectionRange(val.length,val.length)}}});$$(".cmsgs").forEach(e=>e.scrollTop=e.scrollHeight);hydrate()}
+function myReq(){memo("my",[S.apps,me&&me.id],()=>keep(()=>{const a=S.apps.find(x=>x.id===me?.id),b=$("#myApp");
+if(!me){b.innerHTML='<div class="card emptyc"><div class="big-ic">🔒</div><h2>سجّل دخولك لعرض طلباتك</h2></div>';return}
+if(!a){b.innerHTML=`<div class="card emptyc rv"><div class="big-ic">📭</div><h2>لا توجد طلبات حتى الآن</h2><p class="muted">قدّم طلب دخول لكلانك وتابع حالته من هنا، وتكلّم مع الإدارة مباشرة.</p><button class="big" onclick="go('apply')">قدّم طلب دخول</button></div>`;rv();return}
+const st=a.status||"review",w={review:"33.4%",accepted:"66.8%",rejected:"66.8%"}[st]||"33.4%";
+b.innerHTML=`<div class="card"><h2>${esc(a.clan)} <span class="tag">${esc(a.mode)}</span> <span class="tag ${SC(st)}">${SL[st]||SL.review}</span></h2>
+<div class="tl" style="--w:${w}"><span class="ln"></span><div class="done"><i>✓</i>تم الإرسال</div><div class="${st==="review"?"act":"done"}"><i>${st==="review"?"⏳":"✓"}</i>مراجعة الإدارة</div><div class="${st==="accepted"?"done ok":st==="rejected"?"done no":""}"><i>${st==="accepted"?"🏆":st==="rejected"?"✕":"•"}</i>القرار</div></div>
+${st==="accepted"?'<div class="banner">🎉 مبروك! تم قبول كلانك في البطولة — تابع صفحة المواعيد.</div>':""}
+<div class="kv"><div><small>الرانك</small>${esc(a.rank)}</div><div><small>رئيس الكلان</small>${esc(a.lead)}</div><div><small>الحساب</small>${esc(a.acc)}</div><div><small>الأعضاء</small>${esc(a.mem||"-")}</div><div><small>منذ</small>${esc(a.since||"-")}</div><div><small>أيام التواجد</small>${esc(a.days||"-")}</div><div><small>تاريخ التقديم</small>${fmtS(a.ts)}</div></div>
+${a.img?`<div class="proof" data-img="${a.id}" data-k="${a.id}_${a.ts}">⏳</div>`:""}
+${a.chatOpen?chatHtml(a,"u"):`<div class="chatoff"><p class="muted">💬 عايز تكلّم الإدارة بخصوص طلبك؟</p><button class="big" onclick="openChat('${a.id}')">فتح شات مع الإدارة</button></div>`}
+${st==="rejected"?`<div class="row" style="margin-top:14px"><button class="btn go" onclick="go('apply')">تقديم طلب جديد</button></div>`:""}</div>`}))}
+// ===== الإدارة =====
+function rApps(){memo("apps",S.apps,()=>keep(()=>{const L=S.apps.slice().sort((a,b)=>(b.ts||0)-(a.ts||0)),c=s=>L.filter(a=>(a.status||"review")===s).length;
+$("#a_apps").innerHTML=`<div class="row cnt"><span class="tag pe">قيد المراجعة ${c("review")}</span><span class="tag ok">مقبول ${c("accepted")}</span><span class="tag no">مرفوض ${c("rejected")}</span></div>`+(L.map(a=>`<div class="card app"><h2>${esc(a.clan)} <span class="tag">${esc(a.mode)}</span> <span class="tag ${SC(a.status)}">${SL[a.status]||SL.review}</span></h2>
+<p>الحساب: ${esc(a.acc)} · الرئيس: ${esc(a.lead)} · الرانك: ${esc(a.rank)}<br>الأعضاء: ${esc(a.mem)}<br>منذ: ${esc(a.since)} · الأيام: ${esc(a.days)}<br>Discord: ${esc(a.dc||"-")} (${esc(a.id)}) · ${fmtS(a.ts)}</p>
+${a.img?`<div class="proof" data-img="${a.id}" data-k="${a.id}_${a.ts}">⏳</div>`:""}
+<div class="row"><button class="btn sm" onclick="setSt('${a.id}','accepted')">قبول</button><button class="btn sm" onclick="setSt('${a.id}','rejected')">رفض</button><button class="btn sm" onclick="setSt('${a.id}','review')">قيد المراجعة</button>${a.chatOpen?`<button class="btn sm" onclick="closeChat('${a.id}')">إغلاق الشات</button>`:`<button class="btn sm" onclick="openChat('${a.id}')">فتح الشات</button>`}</div>${a.chatOpen?chatHtml(a,"a"):""}</div>`).join("")||'<div class="card empty">لا طلبات.</div>')}))}
+function rVis(){memo("vis",[S.vis,S.onlineIds],()=>{const on=S.onlineIds||[];$("#a_vis").innerHTML=`<div class="card">عدد المسجلين: <b>${S.vis.length}</b> · المتصلون الآن: <b>${on.length}</b></div>`+S.vis.slice().sort((a,b)=>(b.seen||0)-(a.seen||0)).map(v=>{const o=on.includes(v.id);return `<div class="card">${esc(v.name)} · Discord: ${esc(v.dc||"-")} · ID: ${esc(v.id)}<br><span class="muted">أول دخول: ${fmtS(v.first)} · آخر ظهور: ${fmtS(v.seen)}</span> <span class="tag ${o?"ok":"no"}">${o?"فاتح الموقع":"مغلق"}</span></div>`}).join("")})}
+function rLog(){memo("log",S.logs,()=>{$("#a_log").innerHTML=S.logs.slice().sort((a,b)=>(b.closed||0)-(a.closed||0)).map(l=>`<div class="card"><b>${esc(l.clan)}</b> · ${fmtS(l.closed)}<p class="muted">${esc(l.mode)} · ${esc(l.acc)} · ${esc(l.rank)} · ${esc(l.mem)}</p><div class="cmsgs" style="height:auto;max-height:240px">${(l.chat||[]).map(m=>`<div class="b ${m.adm?"mine":""}">${esc(m.t)}</div>`).join("")}</div></div>`).join("")||'<div class="card empty">السجل فارغ.</div>'})}
+// ===== نقاط الرسائل الجديدة =====
+const seenN=id=>+LS.get("rl_cs_"+id)||0;
+function chatDots(){let u=0,a=0;S.apps.forEach(x=>{const L=x.chat||[],n=L.length,l=L[n-1];if(!l||n<=seenN(x.id))return;if(x.id===me?.id&&l.adm)u=1;if(isAdm&&!l.adm)a=1});
+$("#myDot").classList.toggle("on",!!u&&curPage!=="myreq");$("#admDot").classList.toggle("on",!!a&&curPage!=="admin")}
+function markChats(){S.apps.forEach(x=>{if(x.id===me?.id||isAdm)LS.set("rl_cs_"+x.id,(x.chat||[]).length)});chatDots()}
+function chatNotify(){S.apps.forEach(x=>{const L=x.chat||[],n=L.length,l=L[n-1];if(CL[x.id]!==undefined&&n>CL[x.id]&&l){if(isAdm&&!l.adm&&curPage!=="admin")toast("رسالة جديدة من "+(x.dc||x.clan),"💬");else if(x.id===me?.id&&l.adm&&curPage!=="myreq")toast("رسالة جديدة من الإدارة","💬")}CL[x.id]=n});chatDots()}
+// ===== الأكشنز =====
+async function post(b){const r=await fetch("/api/db",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});let j={};try{j=await r.json()}catch(e){}if(!r.ok){toast(r.status===403?"غير مسموح":"حصل خطأ — جرّب تاني","⚠️");throw new Error(j.error||r.status)}await sync(true);return j}
+window.del=async(c,id)=>{if(isAdm&&confirm("تأكيد الحذف؟"))await post({c,id,op:"delete"})};
+window.editR=async id=>{const r=S.rules.find(x=>x.id===id),t=prompt("عدّل القانون",r.text);if(t)await post({c:"rules",id,op:"update",data:{text:t.trim(),edited:Date.now()}})};
+window.setSt=(id,s)=>post({c:"applications",id,op:"update",data:{status:s}});
+window.openChat=id=>post({c:"applications",id,op:isAdm?"update":"open",data:{chatOpen:true}});
+window.sendMsg=async(id,w)=>{const i=document.getElementById("cm_"+w+id),t=i&&i.value.trim();if(!t)return;i.value="";await post({c:"applications",id,op:"msg",data:{t}});markChats()};
+window.closeChat=async id=>{if(confirm("إغلاق الشات وحفظه في السجل؟"))await post({c:"applications",id,op:"closechat"})};
+$("#addR").onclick=async()=>{const t=$("#rt").value.trim();if(!t)return;await post({c:"rules",id:"r"+Date.now(),op:"set",data:{text:t,ts:Date.now()}});$("#rt").value="";toast("تمت إضافة القانون","📜")};
+$("#addS").onclick=async()=>{const d=$("#sd").value;if(!$("#s1").value.trim()||!$("#s2").value.trim()||!d)return toast("أكمل البيانات","⚠️");
+await post({c:"schedule",id:"s"+Date.now(),op:"set",data:{c1:$("#s1").value.trim(),c2:$("#s2").value.trim(),mode:$("#sm").value,when:new Date(d).toISOString(),room:$("#sr").value.trim(),pass:$("#sp").value.trim(),i1:await img($("#si1").files[0],220,.7),i2:await img($("#si2").files[0],220,.7)}});["s1","s2","sr","sp","sd"].forEach(i=>$("#"+i).value="");$("#si1").value="";$("#si2").value="";toast("تمت إضافة الموعد","📅")};
+$("#sendApp").onclick=async()=>{if(!me?.id)return toast("يجب تسجيل الدخول","🔒");const v=i=>$("#"+i).value.trim(),f=$("#f_img").files[0];
+if(!v("f_clan")||!v("f_acc")||!v("f_lead")||!v("f_rank")||!mode)return toast("أكمل البيانات واختر الرانك والنمط","⚠️");if(!f)return toast("صورة الرانك إجبارية","⚠️");
+const b=$("#sendApp");b.disabled=true;try{await post({c:"applications",id:me.id,op:"set",data:{clan:v("f_clan"),acc:v("f_acc"),lead:v("f_lead"),rank:v("f_rank"),mem:v("f_mem"),since:v("f_since"),days:v("f_days"),mode,img:await img(f,520)}});toast("تم إرسال طلبك 🎉 تابعه من «طلباتي»","📝");go("myreq")}catch(e){}b.disabled=false};
+// ===== المزامنة (نبض الموقع) =====
+function applyData(j){ver=j.v;S.rules=j.rules||[];S.sched=j.schedule||[];S.apps=j.apps||[];S.vis=j.vis||[];S.logs=j.logs||[];S.events=j.events||[];S.members=j.members||0;
+processEvents();rRules();rSched();rHome();myReq();applyUI();if(isAdm){rApps();rLog()}chatNotify()}
+function stats(){$("#onlN").textContent=S.online;countTo($("#c_on"),S.online);if(isAdm)rVis();rBell()}
+async function sync(force){if(busy){if(force)again=true;return}busy=true;
+try{const now=Date.now(),hb=!!me?.id&&now-hbAt>30000,full=force||!booted||(isAdm&&now-fullAt>60000),q=new URLSearchParams({v:full?-1:ver});if(hb)q.set("hb","1");
+const r=await fetch("/api/sync?"+q,{cache:"no-store"});
+if(!r.ok){if(r.status===503&&!noRedisShown){noRedisShown=1;toast("قاعدة البيانات (Upstash Redis) مش متوصّلة بالمشروع","⚠️")}return}
+const j=await r.json();if(hb)hbAt=now;S.online=j.online||0;if(j.onlineIds)S.onlineIds=j.onlineIds;
+if(!j.same){fullAt=now;applyData(j)}stats();booted=true}catch(e){}finally{busy=false;if(again){again=false;sync(true)}}}
+// ===== صفحة طلب الدخول =====
+function applyUI(){const a=S.apps.find(x=>x.id===me?.id),n=$("#applyNote");
+if(!me?.id){$("#applyBox").classList.add("hide");n.innerHTML="";return}
+if(a&&a.status!=="rejected"){$("#applyBox").classList.add("hide");n.innerHTML=`<div class="card rv in" style="text-align:center"><h2>عندك طلب بالفعل ✦</h2><p class="muted">طلب كلان «${esc(a.clan)}» — الحالة: ${SL[a.status]||SL.review}</p><button class="big" onclick="go('myreq')">افتح «طلباتي»</button></div>`;return}
+$("#applyBox").classList.remove("hide");n.innerHTML=a?'<div class="warn">تم رفض طلبك السابق — تقدر تقدّم طلب جديد.</div>':""}
+// ===== الدخول والبوابة =====
 const WHY={denied:"لغيت الموافقة على Discord. اضغط تاني ووافق.",state:"انتهت صلاحية محاولة الدخول، جرّب تاني.",invalid_client:"الـ Client Secret أو الـ Client ID غلط — راجعهم في Discord Developer Portal.",invalid_grant:"رابط الـ Redirect مش مطابق للي في Discord. لازم تضيفه بالظبط في OAuth2 ← Redirects.",redirect_uri:"رابط الـ Redirect مش مطابق للي في Discord.",nocode:"Discord ما رجّعش كود الدخول، جرّب تاني."};
 function gateErr(h){const e=$("#gerr");e.innerHTML=h;e.classList.remove("on");void e.offsetWidth;e.classList.add("on");$("#gate").classList.remove("hide","out");$("#gateBtn").classList.remove("busy")}
 async function dcLogin(){const b=$("#gateBtn");b.classList.add("busy");try{const r=await fetch("/api/health",{cache:"no-store"});let j;try{j=await r.json()}catch(e){}
@@ -265,29 +560,19 @@ $("#linkBtn").onclick=()=>{if(me)location.href="/api/logout";else dcLogin()};
 $("#gateBtn").onclick=dcLogin;
 $("#gateBtn").addEventListener("pointermove",e=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty("--mx",(e.clientX-r.left)+"px");e.currentTarget.style.setProperty("--my",(e.clientY-r.top)+"px")});
 $("#gateSkip").onclick=()=>{try{sessionStorage.setItem("gs","1")}catch(e){}$("#gate").classList.add("out");setTimeout(()=>$("#gate").classList.add("hide"),800)};
-$$("[data-a]").forEach(b=>b.onclick=()=>{$$(".ap").forEach(e=>e.classList.add("hide"));$("#"+b.dataset.a).classList.remove("hide")});
-// boot
-const api=(c,m,b)=>fetch("/api/db"+(m==="GET"?"?c="+c:""),{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined}).then(r=>r.json());
-const pollers=[];rRules();$$("#ranks .rk").forEach(b=>b.onclick=()=>{$$("#ranks .rk").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("#f_rank").value=b.dataset.v});
-function mkDb(){return{collection(c){const doc=id=>({id,
-async get(){const l=await api(c,"GET");const x=l.find(d=>d.id===id);const {id:_,...r}=x||{};return{id,exists:!!x,data:()=>r}},
-async set(d){await api(c,"POST",{c,id,op:"set",data:d});pollers.forEach(f=>f())},
-async update(d){await api(c,"POST",{c,id,op:"update",data:d});pollers.forEach(f=>f())},
-async delete(){await api(c,"POST",{c,id,op:"delete"});pollers.forEach(f=>f())}});
-return{doc,onSnapshot(next){let prev=null;const run=async()=>{try{const l=await api(c,"GET");if(!Array.isArray(l))return;const m={};l.forEach(d=>{const {id,...r}=d;m[id]=JSON.stringify(r)});if(prev&&JSON.stringify(m)===JSON.stringify(prev))return;const ch=l.filter(d=>!prev||prev[d.id]!==m[d.id]);prev=m;next({docs:l.map(d=>{const {id,...r}=d;return{id,data:()=>r,metadata:{hasPendingWrites:false}}}),docChanges:()=>ch.map(d=>({type:"modified",doc:{id:d.id,metadata:{hasPendingWrites:false}}}))})}catch(e){}};run();const t=setInterval(run,4000);pollers.push(run);return()=>clearInterval(t)}}}}}
-function watch(n,key,fn){let init=true;col(n).onSnapshot(s=>{S[key]=s.docs.map(d=>({id:d.id,...d.data()}));fn();if(!init&&(n==="rules"||n==="schedule")&&s.docChanges().some(c=>!c.doc.metadata.hasPendingWrites))toast("🔔 تم تحديث "+(n==="rules"?"القوانين":"المواعيد"));init=false},()=>{})}
-(async()=>{db=mkDb();try{const r=await fetch("/api/me").then(r=>r.json());if(r){me=r;isAdm=r.isAdmin}}catch(e){}
-$("#meTxt").textContent=me?.id?"مسجّل بحساب Discord: "+me.name:"سجّل الدخول بحساب Discord لإرسال طلب";$("#linkBtn").textContent=me?"تسجيل الخروج":"الدخول بحساب Discord";if(!me?.id)$("#applyBox").classList.add("hide");
-if(me?.id){$("#uchip").classList.add("on");$("#uname").textContent=me.name;if(me.avatar)$("#uav").src=me.avatar;else $("#uav").remove()}
+$$("[data-a]").forEach(b=>b.onclick=()=>{$$(".ap").forEach(e=>e.classList.add("hide"));$("#"+b.dataset.a).classList.remove("hide");$$("[data-a]").forEach(x=>x.classList.toggle("go",x===b));if(b.dataset.a==="a_apps")hydrate()});
+$("#replay").onclick=()=>{try{sessionStorage.removeItem("intro")}catch(e){}location.reload()};
+$$("#ranks .rk").forEach(b=>b.onclick=()=>{$$("#ranks .rk").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");$("#f_rank").value=b.dataset.v});
+rVar();rRules();
+// ===== التشغيل =====
+(async()=>{try{const r=await fetch("/api/me",{cache:"no-store"}).then(r=>r.json());if(r){me=r;isAdm=r.isAdmin}}catch(e){}
+$("#meTxt").textContent=me?.id?"مسجّل بحساب Discord: "+me.name:"سجّل الدخول بحساب Discord لإرسال طلب";$("#linkBtn").textContent=me?"تسجيل الخروج":"الدخول بحساب Discord";
+if(me?.id){$("#uchip").classList.add("on");$("#uname").textContent=me.name;if(me.avatar)$("#uav").src=me.avatar;else $("#uav").remove();$("#myBtn").classList.remove("hide")}
+if(isAdm)$("#adminBtn").classList.remove("hide");
 const qs=new URLSearchParams(location.search),lg=qs.get("login");
-if(qs.get("welcome")&&me?.id){history.replaceState(null,"","/");setTimeout(()=>toast("أهلاً "+me.name+" ✦ تم تسجيل دخولك"),5600)}
+if(qs.get("welcome")&&me?.id){history.replaceState(null,"","/");setTimeout(()=>toast("أهلاً "+me.name+" ✦ تم تسجيل دخولك","👋"),1200)}
 if(lg){history.replaceState(null,"","/");const why=qs.get("why");gateErr(lg==="config"?"إعدادات Discord ناقصة على السيرفر. افتح <code>/api/health</code> وشوف إيه الناقص.":(WHY[why]||"فشل تسجيل الدخول"+(why?" (<code>"+esc(why)+"</code>)":"")+"، حاول مرة أخرى."))}
 else{let sk=0;try{sk=sessionStorage.getItem("gs")}catch(e){}if(!me?.id&&!sk)$("#gate").classList.remove("hide")}
-
-watch("rules","rules",rRules);watch("schedule","sched",rSched);
-if(me?.id){const d=col("visitors").doc(me.id),s=await d.get().catch(()=>null),o=s&&s.exists?s.data():{};dcName=me.name;
-const beat=()=>d.set({...o,name:me.name,first:o.first||Date.now(),seen:Date.now(),dc:dcName}).catch(()=>{});beat();setInterval(beat,30000);watch("applications","apps",()=>{myApp();rApps()})}
-if(isAdm){$("#adminBtn").classList.remove("hide");watch("applications","apps",()=>{myApp();rApps()});watch("visitors","vis",rVis);watch("logs","logs",rLog)}
-})();
-setInterval(()=>{const e=document.createElement("i");e.className="fl";e.style.cssText=`left:${Math.random()*100}vw;top:${60+Math.random()*40}vh`;document.body.appendChild(e);setTimeout(()=>e.remove(),7000)},500);
+await sync(true);setInterval(()=>{if(!document.hidden)sync()},8000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
+setInterval(()=>{const e=document.createElement("i");e.className="fl";e.style.cssText=`left:${Math.random()*100}vw;top:${60+Math.random()*40}vh`;document.body.appendChild(e);setTimeout(()=>e.remove(),7000)},500)})();
 </script></body></html>
